@@ -1,0 +1,7 @@
+# 忽略依赖文件
+*/node_modules/
+node_modules
+
+*/dist/
+
+package-lock.json
