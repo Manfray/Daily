@@ -1,0 +1,4 @@
+# 淘宝npm镜像
+```
+--registry=https://registry.npm.taobao.org
+```
