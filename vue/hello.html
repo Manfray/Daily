@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Vue3 Demo</title>
+</head>
+<body>
+  <div id="app">
+    {{name}}
+  </div>
+  <script src="./script/vue.js"></script>
+  <script>
+    const app = Vue.createApp({
+      data() {
+        return {
+          name: 'shenfq'
+        }
+      },
+      template: `<div> Vue App </div> `
+    })
+    app.mount('#app')
+  </script>
+</body>
+</html>
