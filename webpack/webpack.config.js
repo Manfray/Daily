@@ -14,7 +14,13 @@ module.exports = {
           'style-loader',
           'css-loader'
         ]
-      }
+      },
+      // {
+      //   test: /\.txt$/,
+      //   use: {
+      //     loader: path.resolve('./src/loader/test.js')
+      //   }
+      // }
     ]
   }
 };
