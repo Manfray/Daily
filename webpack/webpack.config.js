@@ -1,9 +1,10 @@
 const path = require('path');
 
 module.exports = {
+  // mode: 'development',
   entry: './src/index.js',
   output: {
-    filename: 'bundle.js',
+    filename: 'bundle-[hash].js',
     path: path.resolve(__dirname, 'dist')
   },
   module: {
@@ -15,6 +16,14 @@ module.exports = {
           'css-loader'
         ]
       },
+      {
+        test: /\.scss$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          'scss-loader'
+        ]
+      },
       // {
       //   test: /\.txt$/,
       //   use: {
@@ -22,5 +31,8 @@ module.exports = {
       //   }
       // }
     ]
-  }
+  },
+  plugins: [
+    
+  ]
 };
