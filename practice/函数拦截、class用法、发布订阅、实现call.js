@@ -38,7 +38,7 @@ const dep = {
     this.list.push(fn)
   },
   publish () {
-    for (let i = 0; i < this.list.length) {
+    for (let i = 0, len = this.list.length; i < len; i++) {
       this.list[i]()
     }
   }
