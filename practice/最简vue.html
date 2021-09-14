@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div id='app'>
+        <h3>姓名</h3>
+        <p>{{name}}</p>
+        <h3>年龄</h3>
+        <p>{{age}}</p>
+    </div>
+</body>
+</html>
+<script>
+  document.addEventListener('DOMContentLoaded', function(){
+    let opt = {el:'#app', data:{name:'检索中...', age:30}}
+    new Vue(opt)
+    setTimeout(() => {
+        opt.data.name = 'Manfray'
+    }, 2000);
+}, false)
+  class Vue{
+    constructor (opt) {
+      // 传入 V 和 M
+      // 1、copy一份data，并为原来的每个key都添加代理，就可以捕获到每一次属性修改了，这样还不能实现更新dom，因此需要将绑定的dom对象引用地址，存在这里；因此引出了观察者；
+      // 2、每个key生成一个独有的观察者，并可以接收对应的dom对象作为依赖，主动添加的方式不可取，可以通过编译html时候放进来
+      this.opt = opt
+      const data = opt.data
+      const _data = {}
+      Object.keys(data).forEach(key => {
+        _data['_' + key] = data[key]
+        Object.defineProperty(data,key, {
+          get () {
+            console.log('获取key:' + key)
+            return _data['_' + key]
+          },
+          set (newVal) {
+            console.log('设置key:' + key + ':' + newVal)
+            _data['_' + key] = newVal
+          }
+        } )
+      })
+      this.compile(document.querySelector(opt.el))
+      // 解析V
+      //   1、将V中每个模型变量填充为data中对应的值
+      //   2、填充的同时，把要更新的对象同步到观察者中
+    }
+    // 初始化页面，遍历 DOM，收集每一个key变化时，随之调整的位置，以观察者方法存放起来。只有页面使用的变量才会被观察  
+    compile(node){
+        [].forEach.call(node.childNodes, child =>{
+            if(!child.firstElementChild && /\{\{(.*)\}\}/.test(child.innerHTML)){ // firstElementChild 只读属性返回指定的父元素的第一个子元素 !firstElementChild说明子元素是文本
+              let key = RegExp.$1.trim()
+              child.innerHTML = child.innerHTML.replace(new RegExp('\\{\\{\\s*'+ key +'\\s*\\}\\}', 'gm'),this.opt.data[key]) 
+              Observer.target = child // 订阅的目标dom,只装载文本
+              this.opt.data[key] // 会触发get方法，触发观察者，订阅观察主体
+              Observer.target = null // 清空target，未下一个轮训腾位置
+            }
+            else if (child.firstElementChild)
+            this.compile(child)
+        })
+    } 
+  }
+  // 观察者构造类
+  class Observer {
+    constructor () {
+      this.deps = []
+    }
+    addDeps (dep) {
+      this.deps.push(dep)
+    }
+    update (newVal) {
+      let deps = this.deps
+      for (let i = 0,len = deps.length; i < len; i++) {
+        deps[i].innerHtml = newVal
+      }
+    }
+  }
+</script>
