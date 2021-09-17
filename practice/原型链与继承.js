@@ -15,7 +15,7 @@ function Cat() {
 }
 Cat.prototype = new Animal()
 Cat.prototype.sayCName = function () {
-  console.log(this.name)
+  console.log(this.cname)
 }
 var c1 = new Cat()
 console.log(c1)

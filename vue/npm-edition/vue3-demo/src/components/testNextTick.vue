@@ -15,6 +15,7 @@ export default {
   methods: {
     test () {
       // for (let i = 0; i < 10; i++) {
+        console.log('乘以2')
         this.name = this.name * 2
         // setTimeout(() => {
         //   this.name = this.name * 2
@@ -40,6 +41,8 @@ export default {
           console.log(this.$refs['nm'].innerText)
           this.name = this.name / 2
         })
+        console.log('乘以2')
+        this.name = this.name * 2
         /**
          * 最终的结果
          */
