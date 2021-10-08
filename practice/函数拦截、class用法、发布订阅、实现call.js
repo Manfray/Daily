@@ -84,21 +84,22 @@ fn.myApply(null, 1, 2)
 fn.myApply(obj1, 1, 2)
 
 // call的实现 1.this绑定到目标  2.参数传过去  3.考虑null和有返回值的
-Function.prototype.myCall = function (obj, ...arg) {
-  // null也是对象
-  obj = obj || window
-  // 为这个对象添加目标函数
-  obj.fn = this
-  // 执行该函数
-  let res = obj.fn(...arg) // es6办法
-  // let args = [] // es3的eval方法
-  // for (let i = 1, len = arguments.length; i < len; i++) {
-  //   args.push(arguments[i])
-  // }
-  // eval('obj.fn(' + args + ')')
-  delete obj.fn
-  return res
+Function.prototype.myCall = function(target, ...arg) {
+  // 参数校验null
+  if (!target === true && typeof target === 'object') { 
+    return '[object Null]'
+  } else if (typeof target === 'undefined') {
+    return '[object Undefined]'
+  } else {
+    // this指的就是目标方法
+    const obj = target
+    obj.f = this
+    const res = obj.f()
+    delete obj.f
+    return res
+  }
 }
+console.log(Object.prototype.toString.myCall({}).slice(8, -1))
 // call的实现 1.this绑定到目标  2.参数传过去  3.考虑null和有返回值的
 Function.prototype.myApply = function (obj, arg) {
   // null也是对象

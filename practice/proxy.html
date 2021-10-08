@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <input id="input" type="text">
+  <p id="p"></p>
+  <script>
+    const input = document.getElementById('input');
+    const p = document.getElementById('p');
+    const obj = {};
+    const arr = []
+
+    const newArr = new Proxy(arr, {
+      get: function(target, key, receiver) {
+        console.log(`getting ${key}!`);
+        console.log(Reflect)
+        return Reflect.get(target, key, receiver);
+      },
+      set: function(target, key, value, receiver) {
+        console.log('set')
+        console.log(target, key, value, receiver);
+        input.value = value;
+        p.innerHTML = value;
+        return Reflect.set(target, key, value, receiver);
+      }
+    });
+
+    input.addEventListener('keyup', function(e) {
+      newArr.push(e.target.value);
+    });
+
+
+  </script>
+</body>
+</html>

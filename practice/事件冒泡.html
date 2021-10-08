@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div class="classv">
+    我是祖宗
+    <div class="actva">我是老大
+        <div class="foo">我是老幺</div>
+    </div>
+
+</div>
+<script type="text/javascript">
+    var a = document.querySelector('.classv').addEventListener('click', function(e) {
+        console.log('我是祖宗', e.target, e.currentTarget)
+        
+    }, true)
+    var b = document.querySelector('.actva').addEventListener('click', function(e) {
+        console.log('我是老大', e.target, e.currentTarget)
+    }, true)
+    var c = document.querySelector('.foo').addEventListener('click', function(e) {
+        console.log('我是老幺', e.target, e.currentTarget)
+    }, true)
+</script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+     .container{
+      height: 100vh;
+      /* 关键css处: 竖向space-between */
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .main{
+      /* 关键css处: 要指定flex */
+      flex: 1;
+      background-image: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+    }
+
+    .footer{
+      padding: 15px 0;
+      text-align: center;
+      color: #ff9a9e;
+      font-size: 14px;
+    }
+
+    .box .img-container{
+      width: 100vw;
+      height: 66.620879vw;
+      padding-bottom: inherit;
+    }
+    img{
+      width: 100%;
+    }
+
+  </style>
+</head>
+<body>
+  <p>图片底部5px高度</p>
+  <div style="background-color: aquamarine;">
+    <span>我是普通文本</span>
+    <span>我是个inline-block文本</span>
+    <img src="./assets/test.png" alt="test1">
+    <!-- 方案：1、设置父级font-size为0; 2、设置img的display: block; 3、设置img的vertical-align: bottom -->
+  </div>
+  <div class="container">
+    <div class="main">我是内容区域</div>
+    <div class="footer">规则说明</div>
+  </div>
+  <div class="box">
+    <div class="img-container">
+      <img src="./assets/test.png" alt="">
+    </div>
+  </div>
+</body>
+</html>
