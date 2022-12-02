@@ -1,0 +1,82 @@
+
+.hide-scrollbar() {
+  /*IE10,IE11,IE12*/
+  -ms-scroll-chaining: chained;
+  -ms-overflow-style: none;
+  -ms-content-zooming: zoom;
+  -ms-scroll-rails: none;
+  -ms-content-zoom-limit-min: 100%;
+  -ms-content-zoom-limit-max: 500%;
+  -ms-scroll-snap-type: proximity;
+  -ms-scroll-snap-points-x: snapList(100%, 200%, 300%, 400%, 500%);
+  -ms-overflow-style: none;
+  overflow: auto;
+  /*chrome*/
+  &::-webkit-scrollbar {
+      display: none;
+  }
+}
+
+.custom-scrollbar() {
+  /*隐藏滚动条，当IE下溢出，仍然可以滚动*/
+  -ms-overflow-style: scrollbar;
+  scrollbar-arrow-color: #fff;
+  scrollbar-face-color: rgb(224, 224, 224);
+  scrollbar-3dlight-color: #fff;
+  scrollbar-highlight-color: #fff;
+  scrollbar-shadow-color: #fff;
+  scrollbar-darkshadow-color: #fff;
+  scrollbar-track-color: #fff;
+  scrollbar-base-color: #fff;
+  //debkit浏览器
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: transparent;
+    cursor: pointer;
+  }
+
+  :hover::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+    background-color: #d0d0d0;
+  }
+
+  /*定义滚动条轨道 内阴影+圆角*/
+
+  ::-webkit-scrollbar-track {
+    border-radius: 5px;
+  }
+
+  :hover::-webkit-scrollbar-track {
+    border-radius: 5px;
+    background-color: transparent;
+  }
+
+  /*定义滑块 内阴影+圆角*/
+
+  ::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    // background-color: #a9a9a9;
+    border-radius: 5px;
+  }
+
+  :hover::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-color: #a9a9a9;
+  }
+}
+/** 单行多行文本省略函数**/
+.single-ellipsis(){
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.duplicateEllipsis(@line:2){
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical; /*设置对齐模式*/
+  -webkit-line-clamp: @line; /*设置多行的行数*/
+}
